@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Contact — Spacious Africa{% endblock %}
+{% block content %}
+<div class="relative border-b border-white/[0.06] bg-zinc-950 px-4 py-16 overflow-hidden">
+  <div class="orb-1 absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gold/[0.05] blur-3xl pointer-events-none"></div>
+  <div class="relative max-w-6xl mx-auto">
+    <h1 class="text-4xl md:text-5xl font-black bg-gradient-to-r from-gold to-gold-dark bg-clip-text text-transparent mb-2">Contact Us</h1>
+    <p class="text-zinc-400">Reach out to the Spacious Africa team</p>
+  </div>
+</div>
+<div class="max-w-5xl mx-auto px-4 py-16 grid md:grid-cols-[1fr_320px] gap-8">
+  <!-- form -->
+  <div class="bg-zinc-900 border border-white/[0.07] rounded-2xl p-8">
+    <h2 class="text-lg font-black text-gold mb-6">Send a Message</h2>
+    <form method="POST" class="space-y-5">
+      {% csrf_token %}
+      <div><label class="block text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2">Full Name</label>
+        <input type="text" name="name" required placeholder="Your name" class="w-full bg-zinc-800 border border-white/[0.08] rounded-xl text-white text-sm px-4 py-3 outline-none focus:border-gold/50 focus:ring-2 focus:ring-gold/10 transition-all placeholder:text-zinc-600"></div>
+      <div><label class="block text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2">Email Address</label>
+        <input type="email" name="email" required placeholder="you@email.com" class="w-full bg-zinc-800 border border-white/[0.08] rounded-xl text-white text-sm px-4 py-3 outline-none focus:border-gold/50 focus:ring-2 focus:ring-gold/10 transition-all placeholder:text-zinc-600"></div>
+      <div><label class="block text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2">Subject</label>
+        <input type="text" name="subject" required placeholder="e.g. Collaboration, Booking" class="w-full bg-zinc-800 border border-white/[0.08] rounded-xl text-white text-sm px-4 py-3 outline-none focus:border-gold/50 focus:ring-2 focus:ring-gold/10 transition-all placeholder:text-zinc-600"></div>
+      <div><label class="block text-xs font-bold uppercase tracking-widest text-zinc-400 mb-2">Message</label>
+        <textarea name="message" required rows="5" placeholder="Tell us more..." class="w-full bg-zinc-800 border border-white/[0.08] rounded-xl text-white text-sm px-4 py-3 outline-none focus:border-gold/50 focus:ring-2 focus:ring-gold/10 transition-all placeholder:text-zinc-600 resize-none"></textarea></div>
+      <button type="submit" class="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-gold to-gold-dark text-black font-bold rounded-xl hover:brightness-110 transition-all">
+        <i class="fa-solid fa-paper-plane"></i> Send Message
+      </button>
+    </form>
+  </div>
+  <!-- info -->
+  <div class="space-y-4">
+    <div class="bg-zinc-900 border border-white/[0.07] rounded-2xl p-6">
+      <h3 class="text-sm font-black text-gold mb-4"><i class="fa-solid fa-envelope mr-2"></i>Email Us</h3>
+      <div class="space-y-2 text-sm text-zinc-400">
+        <p><span class="text-white font-semibold">General:</span> info@spaciousafrica.com</p>
+        <p><span class="text-white font-semibold">CEO:</span> ceo@spaciousafrica.com</p>
+        <p><span class="text-white font-semibold">Media:</span> media@spaciousafrica.com</p>
+        <p><span class="text-white font-semibold">Clients:</span> clients@spaciousafrica.com</p>
+      </div>
+    </div>
+    <div class="bg-zinc-900 border border-white/[0.07] rounded-2xl p-6">
+      <h3 class="text-sm font-black text-gold mb-4"><i class="fa-solid fa-share-nodes mr-2"></i>Follow Us</h3>
+      <div class="flex flex-wrap gap-2">
+        <a href="#" class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-bold hover:bg-red-500 hover:text-white transition-all"><i class="fa-brands fa-youtube"></i> YouTube</a>
+        <a href="#" class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-pink-500/10 border border-pink-500/20 text-pink-400 text-xs font-bold hover:bg-pink-500 hover:text-white transition-all"><i class="fa-brands fa-instagram"></i> Instagram</a>
+        <a href="#" class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-white/[0.04] border border-white/[0.08] text-zinc-300 text-xs font-bold hover:bg-black hover:text-white transition-all"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+      </div>
+    </div>
+    <div class="bg-zinc-900 border border-white/[0.07] rounded-2xl p-6">
+      <h3 class="text-sm font-black text-gold mb-3"><i class="fa-regular fa-clock mr-2"></i>Business Hours</h3>
+      <p class="text-sm text-zinc-400">Mon – Fri: 8:00 AM – 6:00 PM</p>
+      <p class="text-sm text-zinc-400">Saturday: 9:00 AM – 2:00 PM</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}{{ track.title }} — Spacious Africa{% endblock %}
+{% block content %}
+{% if track.thumbnail %}
+<div class="relative w-full h-72 md:h-80 bg-zinc-900 overflow-hidden">
+  <img src="{{ track.thumbnail.url }}" alt="{{ track.title }}" class="w-full h-full object-cover opacity-50">
+  <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 to-transparent"></div>
+</div>
+{% endif %}
+<div class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-[1fr_280px] gap-8">
+  <div>
+    <div class="flex items-center gap-2 text-xs text-zinc-500 mb-5">
+      <a href="{% url 'home' %}" class="hover:text-white">Home</a><span>/</span>
+      <a href="{% url 'track_list' %}" class="hover:text-white">Music</a><span>/</span>
+      <span class="text-zinc-400">{{ track.title }}</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-black bg-gradient-to-r from-gold to-gold-dark bg-clip-text text-transparent mb-2">{{ track.title }}</h1>
+    <p class="text-lbl font-bold mb-4">{{ track.artist_name }}</p>
+    <div class="flex flex-wrap gap-2 mb-6">
+      <span class="text-xs font-bold px-3 py-1 rounded-full bg-gold/10 border border-gold/20 text-gold">{{ track.get_genre_display }}</span>
+      {% if track.release_date %}<span class="text-xs font-bold px-3 py-1 rounded-full bg-white/[0.05] border border-white/[0.08] text-zinc-300">{{ track.release_date|date:"F Y" }}</span>{% endif %}
+    </div>
+    <div class="flex flex-wrap gap-2">
+      {% if track.youtube_url %}<a href="{{ track.youtube_url }}" target="_blank" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-bold hover:bg-red-500 hover:text-white transition-all"><i class="fa-brands fa-youtube"></i> YouTube</a>{% endif %}
+      {% if track.spotify_url %}<a href="{{ track.spotify_url }}" target="_blank" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm font-bold hover:bg-emerald-500 hover:text-white transition-all"><i class="fa-brands fa-spotify"></i> Spotify</a>{% endif %}
+      {% if track.soundcloud_url %}<a href="{{ track.soundcloud_url }}" target="_blank" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-400 text-sm font-bold hover:bg-orange-500 hover:text-white transition-all"><i class="fa-brands fa-soundcloud"></i> SoundCloud</a>{% endif %}
+      {% if track.tiktok_url %}<a href="{{ track.tiktok_url }}" target="_blank" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-zinc-300 text-sm font-bold hover:bg-black hover:text-white transition-all"><i class="fa-brands fa-tiktok"></i> TikTok</a>{% endif %}
+      {% if track.apple_music_url %}<a href="{{ track.apple_music_url }}" target="_blank" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-800 border border-white/[0.08] text-zinc-300 text-sm font-bold hover:bg-zinc-700 transition-all"><i class="fa-brands fa-apple"></i> Apple Music</a>{% endif %}
+    </div>
+  </div>
+  {% if related %}
+  <div class="bg-zinc-900 border border-white/[0.07] rounded-2xl p-5 self-start">
+    <h3 class="text-xs font-black uppercase tracking-widest text-gold mb-4">More Tracks</h3>
+    <div class="space-y-3">
+      {% for t in related %}
+      <a href="{% url 'track_detail' t.pk %}" class="flex items-center gap-3 group">
+        {% if t.thumbnail %}<img src="{{ t.thumbnail.url }}" class="w-10 h-10 object-cover rounded-full flex-shrink-0">
+        {% else %}<div class="w-10 h-10 bg-zinc-800 rounded-full flex-shrink-0 flex items-center justify-center text-zinc-600 text-xs"><i class="fa-solid fa-music"></i></div>{% endif %}
+        <div class="min-w-0"><div class="text-sm font-semibold text-white truncate group-hover:text-gold transition-colors">{{ t.title }}</div>
+        <div class="text-xs text-lbl">{{ t.artist_name }}</div></div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

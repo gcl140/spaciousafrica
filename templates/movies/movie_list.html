@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Movies — Spacious Africa{% endblock %}
+{% block content %}
+<div class="relative border-b border-white/[0.06] bg-zinc-950 px-4 py-14 overflow-hidden">
+  <div class="orb-1 absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gold/[0.05] blur-3xl pointer-events-none"></div>
+  <div class="relative max-w-6xl mx-auto">
+    <h1 class="text-4xl md:text-5xl font-black bg-gradient-to-r from-gold to-gold-dark bg-clip-text text-transparent mb-2"><i class="fa-solid fa-film mr-3"></i>Spacious Movies</h1>
+    <p class="text-zinc-400">African cinema at its finest</p>
+  </div>
+</div>
+<div class="max-w-6xl mx-auto px-4 py-10">
+  <div class="flex flex-wrap gap-2 pb-5 mb-6 border-b border-white/[0.06]">
+    <a href="{% url 'movie_list' %}" class="px-3 py-1.5 rounded-full text-xs font-bold border {% if not active_genre %}bg-gold/10 border-gold/30 text-gold{% else %}border-white/[0.08] text-zinc-500 hover:text-white{% endif %} transition-colors">All</a>
+    {% for val, label in genres %}
+    <a href="?genre={{ val }}" class="px-3 py-1.5 rounded-full text-xs font-bold border {% if active_genre == val %}bg-gold/10 border-gold/30 text-gold{% else %}border-white/[0.08] text-zinc-500 hover:text-white{% endif %} transition-colors">{{ label }}</a>
+    {% endfor %}
+  </div>
+  {% if movies %}
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+    {% for movie in movies %}
+    <a href="{% url 'movie_detail' movie.pk %}" class="group bg-zinc-900 border border-white/[0.07] rounded-2xl overflow-hidden hover:border-gold/30 hover:-translate-y-1 transition-all duration-300">
+      <div class="card-media relative aspect-[16/10] bg-zinc-800">
+        {% if movie.thumbnail %}<img src="{{ movie.thumbnail.url }}" alt="{{ movie.title }}" class="w-full h-full object-cover">
+        {% else %}<div class="w-full h-full flex items-center justify-center text-4xl text-zinc-700"><i class="fa-solid fa-film"></i></div>{% endif %}
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        <span class="absolute top-2 left-2 text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold/90 text-black">{{ movie.get_genre_display }}</span>
+        <div class="play-btn absolute top-1/2 left-1/2 w-10 h-10 rounded-full bg-gold/90 flex items-center justify-center text-black text-sm pl-0.5"><i class="fa-solid fa-play"></i></div>
+      </div>
+      <div class="p-3"><div class="font-bold text-sm text-white truncate">{{ movie.title }}</div>
+      <div class="text-xs text-zinc-500 mt-0.5">{% if movie.release_date %}{{ movie.release_date|date:"Y" }}{% else %}TBA{% endif %}</div></div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="flex flex-col items-center justify-center py-24 text-zinc-600"><i class="fa-solid fa-film text-5xl mb-4 opacity-30"></i><p class="text-sm">No movies yet.</p></div>
+  {% endif %}
+</div>
+{% endblock %}

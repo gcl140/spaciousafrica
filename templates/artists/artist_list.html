@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Artists — Spacious Africa{% endblock %}
+{% block content %}
+<div class="relative border-b border-white/[0.06] bg-zinc-950 px-4 py-14 overflow-hidden">
+  <div class="orb-1 absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gold/[0.05] blur-3xl pointer-events-none"></div>
+  <div class="relative max-w-6xl mx-auto">
+    <h1 class="text-4xl md:text-5xl font-black bg-gradient-to-r from-gold to-gold-dark bg-clip-text text-transparent mb-2"><i class="fa-solid fa-star mr-3"></i>Our Artists</h1>
+    <p class="text-zinc-400">Actors, musicians, directors and creatives</p>
+  </div>
+</div>
+<div class="max-w-6xl mx-auto px-4 py-10">
+  <div class="flex flex-wrap gap-2 pb-5 mb-6 border-b border-white/[0.06]">
+    <a href="{% url 'artist_list' %}" class="px-3 py-1.5 rounded-full text-xs font-bold border {% if not active_category %}bg-gold/10 border-gold/30 text-gold{% else %}border-white/[0.08] text-zinc-500 hover:text-white{% endif %} transition-colors">All</a>
+    {% for val, label in categories %}
+    <a href="?category={{ val }}" class="px-3 py-1.5 rounded-full text-xs font-bold border {% if active_category == val %}bg-gold/10 border-gold/30 text-gold{% else %}border-white/[0.08] text-zinc-500 hover:text-white{% endif %} transition-colors">{{ label }}</a>
+    {% endfor %}
+  </div>
+  {% if artists %}
+  <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+    {% for artist in artists %}
+    <a href="{% url 'artist_detail' artist.pk %}" class="group bg-zinc-900 border border-white/[0.07] rounded-2xl overflow-hidden text-center hover:border-gold/30 hover:-translate-y-1 transition-all duration-300">
+      <div class="card-media aspect-square bg-zinc-800">
+        {% if artist.photo %}<img src="{{ artist.photo.url }}" alt="{{ artist.name }}" class="w-full h-full object-cover">
+        {% else %}<div class="w-full h-full flex items-center justify-center text-4xl text-zinc-700"><i class="fa-solid fa-user"></i></div>{% endif %}
+      </div>
+      <div class="p-3"><div class="font-bold text-sm text-white truncate group-hover:text-gold transition-colors">{{ artist.name }}</div>
+      <div class="text-xs text-lbl font-semibold mt-0.5">{{ artist.get_category_display }}</div></div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="flex flex-col items-center justify-center py-24 text-zinc-600"><i class="fa-solid fa-star text-5xl mb-4 opacity-30"></i><p class="text-sm">No artists yet.</p></div>
+  {% endif %}
+</div>
+{% endblock %}

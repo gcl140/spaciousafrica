@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Media — Spacious Africa{% endblock %}
+{% block content %}
+<div class="min-h-[70vh] flex flex-col items-center justify-center text-center px-4 gap-5">
+  <div class="float text-8xl text-lbl/40"><i class="fa-solid fa-tv"></i></div>
+  <h2 class="text-4xl md:text-5xl font-black bg-gradient-to-r from-lbl to-lbl-dark bg-clip-text text-transparent">Spacious Media</h2>
+  <p class="text-zinc-400 max-w-sm text-lg">Our media platform is coming soon. Streaming, podcasts, and more!</p>
+  <div class="flex gap-3 flex-wrap justify-center">
+    <a href="{% url 'home' %}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gold to-gold-dark text-black font-bold rounded-xl hover:brightness-110 transition-all"><i class="fa-solid fa-house"></i> Go Home</a>
+    <a href="{% url 'contact' %}" class="inline-flex items-center gap-2 px-6 py-3 bg-white/[0.06] border border-white/[0.1] text-white font-bold rounded-xl hover:bg-white/[0.1] transition-all"><i class="fa-solid fa-bell"></i> Get Notified</a>
+  </div>
+</div>{% endblock %}

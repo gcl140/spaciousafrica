@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Spacious Africa{% endblock %}</title>
+  {% load static %}
+
+  <!-- Tailwind Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['DM Sans', 'system-ui', 'sans-serif'] },
+          colors: {
+            gold:  { DEFAULT:'#D4AF37', light:'#F0D060', dark:'#A88820' },
+            lbl:   { DEFAULT:'#64B5F6', dark:'#1565C0' },
+            surface: { DEFAULT:'#111111', 2:'#1A1A1A', 3:'#222222' },
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- DM Sans + Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <link rel="icon" type="image/png" href="{% static 'images/spac.png' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body class="bg-zinc-950 text-white antialiased min-h-screen">
+
+<!-- ── NAVBAR ──────────────────────────────────── -->
+<header id="navbar" class="fixed top-0 inset-x-0 z-50 h-16 flex items-center px-4 md:px-8 border-b border-white/[0.06] bg-zinc-950/80 backdrop-blur-xl transition-colors duration-300">
+
+  <!-- Logo -->
+  <a href="{% url 'home' %}" class="flex items-center gap-2.5 flex-shrink-0 mr-8">
+    <img src="{% static 'images/spac.png' %}" alt="Spacious Africa" class="h-9 w-auto">
+    <span class="font-black text-base tracking-tight bg-gradient-to-r from-gold to-gold-dark bg-clip-text text-transparent hidden sm:block">
+      Spacious Africa
+    </span>
+  </a>
+
+  <!-- Desktop nav -->
+  <nav class="hidden md:flex items-center gap-1 flex-1">
+    <a href="{% url 'movie_list' %}" class="nav-link px-3 py-1.5 rounded-md text-sm font-medium text-zinc-400 hover:text-white hover:bg-white/[0.06] transition-colors">Movies</a>
+    <a href="{% url 'track_list' %}" class="nav-link px-3 py-1.5 rounded-md text-sm font-medium text-zinc-400 hover:text-white hover:bg-white/[0.06] transition-colors">Music</a>
+    <a href="{% url 'artist_list' %}" class="nav-link px-3 py-1.5 rounded-md text-sm font-medium text-zinc-400 hover:text-white hover:bg-white/[0.06] transition-colors">Artists</a>
+    <a href="{% url 'product_list' %}" class="nav-link px-3 py-1.5 rounded-md text-sm font-medium text-zinc-400 hover:text-white hover:bg-white/[0.06] transition-colors">Shop</a>
+
+    <!-- Explore dropdown -->
+    <div class="relative" id="exploreDropdown">
+      <button id="exploreBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium text-zinc-400 hover:text-white hover:bg-white/[0.06] transition-colors">
+        Explore
+        <i class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200" id="exploreCaret"></i>
+      </button>
+      <div id="exploreMenu" class="drop-menu hidden absolute top-full left-0 mt-2 w-52 bg-zinc-900 border border-white/[0.08] rounded-xl shadow-2xl shadow-black/60 py-1.5 overflow-hidden">
+        <a href="{% url 'event_list' %}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-300 hover:bg-white/[0.06] hover:text-white transition-colors">
+          <i class="fa-solid fa-calendar-days w-4 text-zinc-500"></i> Events
+        </a>
+        <a href="{% url 'gallery' %}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-300 hover:bg-white/[0.06] hover:text-white transition-colors">
+          <i class="fa-solid fa-images w-4 text-zinc-500"></i> Gallery &amp; BTS
+        </a>
+        <a href="{% url 'projects' %}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-300 hover:bg-white/[0.06] hover:text-white transition-colors">
+          <i class="fa-solid fa-rocket w-4 text-zinc-500"></i> New Projects
+        </a>
+        <a href="{% url 'advert_list' %}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-300 hover:bg-white/[0.06] hover:text-white transition-colors">
+          <i class="fa-solid fa-bullhorn w-4 text-zinc-500"></i> Adverts
+        </a>
+        <a href="{% url 'media_list' %}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-300 hover:bg-white/[0.06] hover:text-white transition-colors">
+          <i class="fa-solid fa-tv w-4 text-zinc-500"></i> Media
+          <span class="ml-auto text-[10px] font-bold bg-lbl text-black px-1.5 py-0.5 rounded-full">Soon</span>
+        </a>
+        <div class="my-1.5 border-t border-white/[0.06]"></div>
+        <a href="{% url 'about' %}" class="flex items-center gap-3 px-4 py-2.5 text-sm text-zinc-300 hover:bg-white/[0.06] hover:text-white transition-colors">
+          <i class="fa-solid fa-circle-info w-4 text-zinc-500"></i> About
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Right side -->
+  <div class="hidden md:flex items-center gap-3 ml-auto">
+    <a href="{% url 'contact' %}" class="px-4 py-1.5 bg-gradient-to-r from-gold to-gold-dark text-black text-sm font-bold rounded-lg hover:brightness-110 transition-all">
+      Contact
+    </a>
+  </div>
+
+  <!-- Mobile burger -->
+  <button id="burgerBtn" class="md:hidden ml-auto flex flex-col gap-[5px] p-2 rounded-md hover:bg-white/[0.06] transition-colors" aria-label="Menu">
+    <span id="b1" class="block w-5 h-0.5 bg-white rounded transition-all duration-300 origin-center"></span>
+    <span id="b2" class="block w-4 h-0.5 bg-white rounded transition-all duration-300"></span>
+    <span id="b3" class="block w-5 h-0.5 bg-white rounded transition-all duration-300 origin-center"></span>
+  </button>
+</header>
+
+<!-- ── MOBILE DRAWER ───────────────────────────── -->
+<div id="drawer" class="fixed inset-0 z-40 hidden">
+  <div id="drawerOverlay" class="absolute inset-0 bg-black/70 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+  <div id="drawerPanel" class="absolute top-0 right-0 bottom-0 w-72 bg-zinc-900 border-l border-white/[0.07] flex flex-col translate-x-full transition-transform duration-300 ease-[cubic-bezier(.4,0,.2,1)] overflow-y-auto">
+    <div class="pt-20 px-4 pb-6 flex flex-col gap-1">
+      <a href="{% url 'home' %}" class="drawer-link flex items-center gap-3 px-3 py-3 rounded-lg text-zinc-300 hover:bg-white/[0.06] hover:text-white text-sm font-medium transition-colors">
+        <i class="fa-solid fa-house w-4 text-zinc-500"></i> Home
+      </a>
+      <a href="{% url 'movie_list' %}" class="drawer-link flex items-center gap-3 px-3 py-3 rounded-lg text-zinc-300 hover:bg-white/[0.06] hover:text-white text-sm font-medium transition-colors">
+        <i class="fa-solid fa-film w-4 text-zinc-500"></i> Movies
+      </a>
+      <a href="{% url 'track_list' %}" class="drawer-link flex items-center gap-3 px-3 py-3 rounded-lg text-zinc-300 hover:bg-white/[0.06] hover:text-white text-sm font-medium transition-colors">
+        <i class="fa-solid fa-music w-4 text-zinc-500"></i> Music
+      </a>
+      <a href="{% url 'artist_list' %}" class="drawer-link flex items-center gap-3 px-3 py-3 rounded-lg text-zinc-300 hover:bg-white/[0.06] hover:text-white text-sm font-medium transition-colors">
+        <i class="fa-solid fa-star w-4 text-zinc-500"></i> Artists
+      </a>
+      <a href="{% url 'product_list' %}" class="drawer-link flex items-center gap-3 px-3 py-3 rounded-lg text-zinc-300 hover:bg-white/[0.06] hover:text-white text-sm font-medium transition-colors">
+        <i class="fa-solid fa-shirt w-4 text-zinc-500"></i> Shop
+      </a>
+      <div class="my-1 border-t border-white/[0.06]"></div>
+      <a href="{% url 'event_list' %}" class="drawer-link flex items-center gap-3 px-3 py-3 rounded-lg text-zinc-300 hover:bg-white/[0.06] hover:text-white text-sm font-medium transition-colors">
+        <i class="fa-solid fa-calendar-days w-4 text-zinc-500"></i> Events
+      </a>
+      <a href="{% url 'gallery' %}" class="drawer-link flex items-center gap-3 px-3 py-3 rounded-lg text-zinc-300 hover:bg-white/[0.06] hover:text-white text-sm font-medium transition-colors">
+        <i class="fa-solid fa-images w-4 text-zinc-500"></i> Gallery
+      </a>
+      <a href="{% url 'projects' %}" class="drawer-link flex items-center gap-3 px-3 py-3 rounded-lg text-zinc-300 hover:bg-white/[0.06] hover:text-white text-sm font-medium transition-colors">
+        <i class="fa-solid fa-rocket w-4 text-zinc-500"></i> New Projects
+      </a>
+      <a href="{% url 'advert_list' %}" class="drawer-link flex items-center gap-3 px-3 py-3 rounded-lg text-zinc-300 hover:bg-white/[0.06] hover:text-white text-sm font-medium transition-colors">
+        <i class="fa-solid fa-bullhorn w-4 text-zinc-500"></i> Adverts
+      </a>
+      <a href="{% url 'media_list' %}" class="drawer-link flex items-center gap-3 px-3 py-3 rounded-lg text-zinc-300 hover:bg-white/[0.06] hover:text-white text-sm font-medium transition-colors">
+        <i class="fa-solid fa-tv w-4 text-zinc-500"></i> Media
+        <span class="ml-auto text-[10px] font-bold bg-lbl text-black px-1.5 py-0.5 rounded-full">Soon</span>
+      </a>
+      <div class="my-1 border-t border-white/[0.06]"></div>
+      <a href="{% url 'about' %}" class="drawer-link flex items-center gap-3 px-3 py-3 rounded-lg text-zinc-300 hover:bg-white/[0.06] hover:text-white text-sm font-medium transition-colors">
+        <i class="fa-solid fa-circle-info w-4 text-zinc-500"></i> About
+      </a>
+      <a href="{% url 'contact' %}" class="mt-2 flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-gold to-gold-dark text-black text-sm font-bold rounded-lg hover:brightness-110 transition-all">
+        <i class="fa-solid fa-envelope"></i> Contact Us
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- nav spacer -->
+<div class="h-16"></div>
+
+<!-- ── MESSAGES ────────────────────────────────── -->
+{% if messages %}
+<div class="max-w-5xl mx-auto px-4 mt-3 space-y-2">
+  {% for message in messages %}
+  <div class="msg flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold
+    {% if message.tags == 'success' %}bg-emerald-500/10 border border-emerald-500/20 text-emerald-400
+    {% elif message.tags == 'error' %}bg-red-500/10 border border-red-500/20 text-red-400
+    {% else %}bg-lbl/10 border border-lbl/20 text-lbl{% endif %}">
+    {% if message.tags == 'success' %}<i class="fa-solid fa-circle-check"></i>
+    {% elif message.tags == 'error' %}<i class="fa-solid fa-circle-xmark"></i>
+    {% else %}<i class="fa-solid fa-circle-info"></i>{% endif %}
+    {{ message }}
+    <button class="msg-close ml-auto opacity-60 hover:opacity-100"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+{% block content %}{% endblock %}
+
+<!-- ── FOOTER ─────────────────────────────────── -->
+<footer class="mt-20 border-t border-white/[0.06] bg-zinc-950 px-4 md:px-8 pt-12 pb-8">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 pb-10 border-b border-white/[0.06] mb-8">
+      <div class="col-span-2 md:col-span-1">
+        <div class="font-black text-lg bg-gradient-to-r from-gold to-gold-dark bg-clip-text text-transparent mb-3">Spacious Africa</div>
+        <p class="text-sm text-zinc-500 leading-relaxed mb-4">Africa's premier entertainment hub — movies, music, talent, and more.</p>
+        <div class="flex flex-wrap gap-2">
+          <a href="#" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-bold hover:bg-red-500 hover:text-white transition-all">
+            <i class="fa-brands fa-youtube"></i> YouTube
+          </a>
+          <a href="#" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-pink-500/10 border border-pink-500/20 text-pink-400 text-xs font-bold hover:bg-pink-500 hover:text-white transition-all">
+            <i class="fa-brands fa-instagram"></i> Instagram
+          </a>
+          <a href="#" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/[0.04] border border-white/[0.08] text-zinc-300 text-xs font-bold hover:bg-black hover:text-white transition-all">
+            <i class="fa-brands fa-tiktok"></i> TikTok
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4">Channels</div>
+        <ul class="space-y-2.5 text-sm text-zinc-400">
+          <li><a href="{% url 'movie_list' %}" class="hover:text-white transition-colors">Movies</a></li>
+          <li><a href="{% url 'track_list' %}" class="hover:text-white transition-colors">Music</a></li>
+          <li><a href="{% url 'advert_list' %}" class="hover:text-white transition-colors">Adverts</a></li>
+          <li><a href="{% url 'media_list' %}" class="hover:text-white transition-colors">Media</a></li>
+          <li><a href="{% url 'product_list' %}" class="hover:text-white transition-colors">Wear</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4">Discover</div>
+        <ul class="space-y-2.5 text-sm text-zinc-400">
+          <li><a href="{% url 'artist_list' %}" class="hover:text-white transition-colors">Artists</a></li>
+          <li><a href="{% url 'event_list' %}" class="hover:text-white transition-colors">Events</a></li>
+          <li><a href="{% url 'gallery' %}" class="hover:text-white transition-colors">Gallery</a></li>
+          <li><a href="{% url 'projects' %}" class="hover:text-white transition-colors">New Projects</a></li>
+          <li><a href="{% url 'about' %}" class="hover:text-white transition-colors">About Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-4">Contact</div>
+        <ul class="space-y-2.5 text-sm text-zinc-400">
+          <li><a href="{% url 'contact' %}" class="hover:text-white transition-colors">Get in Touch</a></li>
+          <li><a href="mailto:info@spaciousafrica.com" class="hover:text-white transition-colors">info@spaciousafrica.com</a></li>
+          <li><a href="mailto:ceo@spaciousafrica.com" class="hover:text-white transition-colors">ceo@spaciousafrica.com</a></li>
+          <li><a href="mailto:media@spaciousafrica.com" class="hover:text-white transition-colors">media@spaciousafrica.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="flex flex-col sm:flex-row justify-between gap-2 text-xs text-zinc-600">
+      <span>&copy; {% now "Y" %} Spacious Africa. All rights reserved.</span>
+      <span>Built for African excellence.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="{% static 'js/main.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

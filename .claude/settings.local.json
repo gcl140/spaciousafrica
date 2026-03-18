@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python manage.py startapp core)",
+      "Bash(python manage.py startapp movies)",
+      "Bash(python manage.py startapp music)",
+      "Bash(python manage.py startapp adverts)",
+      "Bash(python manage.py startapp media)"
+    ]
+  }
+}

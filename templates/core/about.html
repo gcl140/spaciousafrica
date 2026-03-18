@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}About — Spacious Africa{% endblock %}
+{% block content %}
+<div class="relative border-b border-white/[0.06] bg-zinc-950 px-4 py-16 overflow-hidden">
+  <div class="orb-1 absolute -top-32 -left-32 w-96 h-96 rounded-full bg-gold/[0.05] blur-3xl pointer-events-none"></div>
+  <div class="relative max-w-6xl mx-auto">
+    <h1 class="text-4xl md:text-5xl font-black bg-gradient-to-r from-gold to-gold-dark bg-clip-text text-transparent mb-2">About Spacious Africa</h1>
+    <p class="text-zinc-400">Africa's premier entertainment and media ecosystem</p>
+  </div>
+</div>
+<div class="max-w-3xl mx-auto px-4 py-16 space-y-8">
+  <div class="bg-zinc-900 border border-white/[0.07] rounded-2xl p-8">
+    <h2 class="text-xl font-black text-gold mb-4">Who We Are</h2>
+    <p class="text-zinc-400 leading-relaxed">Spacious Africa is a multi-faceted entertainment and media company dedicated to showcasing African talent, stories, and culture on the global stage. From cinematic productions to music releases, advertising campaigns to fashion — we are building Africa's digital entertainment future.</p>
+  </div>
+  <div class="grid grid-cols-2 gap-4">
+    {% for icon,name,desc in 'fa-film,Movies,World-class African cinema & short films|fa-music,Music,Discovering & promoting African talent|fa-star,Talent,Managing actors musicians & creatives|fa-shirt,Merchandise,Exclusive branded apparel & goods'.split('|') %}
+    {% with parts=icon|add:','|add:name %}{% endwith %}
+    {% endfor %}
+    <div class="bg-zinc-900 border border-white/[0.07] rounded-2xl p-6 text-center"><div class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-xl text-gold mx-auto mb-3"><i class="fa-solid fa-film"></i></div><div class="font-bold text-sm mb-1">Movies</div><div class="text-xs text-zinc-500">World-class African cinema &amp; short films</div></div>
+    <div class="bg-zinc-900 border border-white/[0.07] rounded-2xl p-6 text-center"><div class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-xl text-gold mx-auto mb-3"><i class="fa-solid fa-music"></i></div><div class="font-bold text-sm mb-1">Music</div><div class="text-xs text-zinc-500">Discovering &amp; promoting African talent</div></div>
+    <div class="bg-zinc-900 border border-white/[0.07] rounded-2xl p-6 text-center"><div class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-xl text-gold mx-auto mb-3"><i class="fa-solid fa-star"></i></div><div class="font-bold text-sm mb-1">Talent</div><div class="text-xs text-zinc-500">Managing actors, musicians &amp; creatives</div></div>
+    <div class="bg-zinc-900 border border-white/[0.07] rounded-2xl p-6 text-center"><div class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-xl text-gold mx-auto mb-3"><i class="fa-solid fa-shirt"></i></div><div class="font-bold text-sm mb-1">Merchandise</div><div class="text-xs text-zinc-500">Exclusive branded apparel &amp; goods</div></div>
+  </div>
+  <div class="text-center"><a href="{% url 'contact' %}" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gold to-gold-dark text-black font-bold rounded-xl hover:brightness-110 transition-all"><i class="fa-solid fa-envelope"></i> Get In Touch</a></div>
+</div>
+{% endblock %}

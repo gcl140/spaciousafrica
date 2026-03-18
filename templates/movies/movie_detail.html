@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}{{ movie.title }} — Spacious Africa{% endblock %}
+{% block content %}
+{% if movie.thumbnail %}
+<div class="relative w-full h-72 md:h-96 bg-zinc-900 overflow-hidden">
+  <img src="{{ movie.thumbnail.url }}" alt="{{ movie.title }}" class="w-full h-full object-cover opacity-60">
+  <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent"></div>
+</div>
+{% endif %}
+<div class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-[1fr_280px] gap-8">
+  <div>
+    <div class="flex items-center gap-2 text-xs text-zinc-500 mb-5">
+      <a href="{% url 'home' %}" class="hover:text-white transition-colors">Home</a><span>/</span>
+      <a href="{% url 'movie_list' %}" class="hover:text-white transition-colors">Movies</a><span>/</span>
+      <span class="text-zinc-400">{{ movie.title }}</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-black bg-gradient-to-r from-gold to-gold-dark bg-clip-text text-transparent mb-4">{{ movie.title }}</h1>
+    <div class="flex flex-wrap gap-2 mb-6">
+      <span class="text-xs font-bold px-3 py-1 rounded-full bg-gold/10 border border-gold/20 text-gold">{{ movie.get_genre_display }}</span>
+      {% if movie.release_date %}<span class="text-xs font-bold px-3 py-1 rounded-full bg-white/[0.05] border border-white/[0.08] text-zinc-300"><i class="fa-regular fa-calendar mr-1"></i>{{ movie.release_date|date:"F j, Y" }}</span>{% endif %}
+      {% if movie.featured %}<span class="text-xs font-bold px-3 py-1 rounded-full bg-lbl/10 border border-lbl/20 text-lbl">Featured</span>{% endif %}
+    </div>
+    <p class="text-zinc-400 leading-relaxed mb-6">{{ movie.description }}</p>
+    <div class="flex flex-wrap gap-2">
+      {% if movie.trailer_url %}<a href="{{ movie.trailer_url }}" target="_blank" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-bold hover:bg-red-500 hover:text-white transition-all"><i class="fa-brands fa-youtube"></i> Watch Trailer</a>{% endif %}
+      {% if movie.youtube_url %}<a href="{{ movie.youtube_url }}" target="_blank" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-bold hover:bg-red-500 hover:text-white transition-all"><i class="fa-brands fa-youtube"></i> YouTube</a>{% endif %}
+      {% if movie.instagram_url %}<a href="{{ movie.instagram_url }}" target="_blank" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-pink-500/10 border border-pink-500/20 text-pink-400 text-sm font-bold hover:bg-pink-500 hover:text-white transition-all"><i class="fa-brands fa-instagram"></i> Instagram</a>{% endif %}
+      {% if movie.tiktok_url %}<a href="{{ movie.tiktok_url }}" target="_blank" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-zinc-300 text-sm font-bold hover:bg-black hover:text-white transition-all"><i class="fa-brands fa-tiktok"></i> TikTok</a>{% endif %}
+    </div>
+  </div>
+  {% if related %}
+  <div class="bg-zinc-900 border border-white/[0.07] rounded-2xl p-5 self-start">
+    <h3 class="text-xs font-black uppercase tracking-widest text-gold mb-4">More Movies</h3>
+    <div class="space-y-3">
+      {% for m in related %}
+      <a href="{% url 'movie_detail' m.pk %}" class="flex items-center gap-3 group">
+        {% if m.thumbnail %}<img src="{{ m.thumbnail.url }}" class="w-14 h-10 object-cover rounded-lg flex-shrink-0 group-hover:opacity-80 transition-opacity">
+        {% else %}<div class="w-14 h-10 bg-zinc-800 rounded-lg flex-shrink-0 flex items-center justify-center text-zinc-600 text-sm"><i class="fa-solid fa-film"></i></div>{% endif %}
+        <div class="min-w-0"><div class="text-sm font-semibold text-white truncate group-hover:text-gold transition-colors">{{ m.title }}</div>
+        <div class="text-xs text-zinc-500">{{ m.get_genre_display }}</div></div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
