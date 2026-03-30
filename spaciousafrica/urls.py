@@ -9,9 +9,10 @@ urlpatterns = [
     path('movies/', include('movies.urls')),
     path('music/', include('music.urls')),
     path('adverts/', include('adverts.urls')),
-    path('media/', include('media.urls')),
+    path('releases/', include('releases.urls')),
     path('wear/', include('wear.urls')),
     path('artists/', include('artists.urls')),
     path('events/', include('events.urls')),
     path('gallery/', include('gallery.urls')),
+    path('api/', include('api.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -206,3 +206,20 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 static/
+junk/
+
+# Flutter — unignore mobile/lib/ (overrides the Python `lib/` rule above)
+!mobile/lib/
+
+# Flutter build artifacts & generated files
+mobile/build/
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/.pub-cache/
+mobile/.pub/
+mobile/coverage/
+mobile/*.iml
+mobile/android/app/debug/
+mobile/android/app/profile/
+mobile/android/app/release/

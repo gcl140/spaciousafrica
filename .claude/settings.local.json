@@ -5,7 +5,22 @@
       "Bash(python manage.py startapp movies)",
       "Bash(python manage.py startapp music)",
       "Bash(python manage.py startapp adverts)",
-      "Bash(python manage.py startapp media)"
+      "Bash(python manage.py startapp media)",
+      "Bash(source venv/bin/activate)",
+      "Bash(pip install:*)",
+      "Bash(python manage.py check)",
+      "Bash(sed -i '' \"s/title: const Text\\(''films''\\)/title: const Text\\(''Films''\\)/\" /Users/giftchristian/Documents/programmin/spaciousafrica/mobile/lib/screens/movies_screen.dart)",
+      "Bash(sed -i '' \"s/title: const Text\\(''music''\\)/title: const Text\\(''Music''\\)/\" /Users/giftchristian/Documents/programmin/spaciousafrica/mobile/lib/screens/music_screen.dart)",
+      "Bash(sed -i '' \"s/title: const Text\\(''events''\\)/title: const Text\\(''Events''\\)/\" /Users/giftchristian/Documents/programmin/spaciousafrica/mobile/lib/screens/events_screen.dart)",
+      "Bash(sed -i '' \"s/title: const Text\\(''artists''\\)/title: const Text\\(''Artists''\\)/\" /Users/giftchristian/Documents/programmin/spaciousafrica/mobile/lib/screens/artists_screen.dart)",
+      "Bash(sed -i '' \"s/title: const Text\\(''shop''\\)/title: const Text\\(''Shop''\\)/\" /Users/giftchristian/Documents/programmin/spaciousafrica/mobile/lib/screens/shop_screen.dart)",
+      "Bash(flutter pub:*)",
+      "Bash(dart run:*)",
+      "Bash(flutter analyze:*)",
+      "Bash(python manage.py startapp profiles)",
+      "Bash(python manage.py makemigrations profiles)",
+      "Bash(python manage.py migrate)",
+      "mcp__ide__getDiagnostics"
     ]
   }
 }
