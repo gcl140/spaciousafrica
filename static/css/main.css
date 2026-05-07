@@ -1,0 +1,32 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+body { font-family: 'DM Sans', system-ui, sans-serif; }
+@keyframes orb1 { 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(60px,40px) scale(1.1)} }
+@keyframes orb2 { 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(-50px,-30px) scale(1.08)} }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+@keyframes fadeSlide { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+.orb-1 { animation: orb1 12s ease-in-out infinite alternate; }
+.orb-2 { animation: orb2 14s ease-in-out infinite alternate; }
+.float  { animation: float 3s ease-in-out infinite; }
+/* card thumb zoom */
+.card-media { overflow:hidden; }
+.card-media img { transition: transform .4s ease; }
+.card-media:hover img, a:hover .card-media img { transform: scale(1.06); }
+/* play button */
+.play-btn { opacity:0; transform:translate(-50%,-50%) scale(.8); transition:opacity .2s,transform .2s; }
+a:hover .play-btn { opacity:1; transform:translate(-50%,-50%) scale(1); }
+/* card hover glow handled via tw group */
+/* dropdown */
+.drop-menu { animation: fadeSlide .18s ease; }
+/* scrollbar */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #09090b; }
+::-webkit-scrollbar-thumb { background: #A88820; border-radius: 3px; }
+/* masonry */
+.gal-grid { columns: 2; gap: 1rem; column-gap: 1rem; }
+@media(min-width:640px){ .gal-grid { columns: 3; } }
+@media(min-width:1024px){ .gal-grid { columns: 4; } }
+.gal-item { break-inside: avoid; margin-bottom: 1rem; }
+/* hide scrollbar on row */
+.scroll-row { scrollbar-width: none; -ms-overflow-style: none; }
+.scroll-row::-webkit-scrollbar { display: none; }
