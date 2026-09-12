@@ -136,6 +136,7 @@ celerybeat.pid
 
 # Environments
 .env
+.env.*
 .envrc
 .venv
 env/
@@ -223,3 +224,4 @@ mobile/*.iml
 mobile/android/app/debug/
 mobile/android/app/profile/
 mobile/android/app/release/
+staticfiles/

@@ -14,9 +14,6 @@
     <p class="text-zinc-400 leading-relaxed">Spacious Africa is a multi-faceted entertainment and media company dedicated to showcasing African talent, stories, and culture on the global stage. From cinematic productions to music releases, advertising campaigns to fashion — we are building Africa's digital entertainment future.</p>
   </div>
   <div class="grid grid-cols-2 gap-4">
-    {% for icon,name,desc in 'fa-film,Movies,World-class African cinema & short films|fa-music,Music,Discovering & promoting African talent|fa-star,Talent,Managing actors musicians & creatives|fa-shirt,Merchandise,Exclusive branded apparel & goods'.split('|') %}
-    {% with parts=icon|add:','|add:name %}{% endwith %}
-    {% endfor %}
     <div class="bg-zinc-900 border border-white/[0.07] rounded-2xl p-6 text-center"><div class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-xl text-gold mx-auto mb-3"><i class="fa-solid fa-film"></i></div><div class="font-bold text-sm mb-1">Movies</div><div class="text-xs text-zinc-500">World-class African cinema &amp; short films</div></div>
     <div class="bg-zinc-900 border border-white/[0.07] rounded-2xl p-6 text-center"><div class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-xl text-gold mx-auto mb-3"><i class="fa-solid fa-music"></i></div><div class="font-bold text-sm mb-1">Music</div><div class="text-xs text-zinc-500">Discovering &amp; promoting African talent</div></div>
     <div class="bg-zinc-900 border border-white/[0.07] rounded-2xl p-6 text-center"><div class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center text-xl text-gold mx-auto mb-3"><i class="fa-solid fa-star"></i></div><div class="font-bold text-sm mb-1">Talent</div><div class="text-xs text-zinc-500">Managing actors, musicians &amp; creatives</div></div>
