@@ -225,3 +225,4 @@ mobile/android/app/debug/
 mobile/android/app/profile/
 mobile/android/app/release/
 staticfiles/
+deploy/check.cloud
