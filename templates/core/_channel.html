@@ -1,9 +1,12 @@
 {% load static %}
-<a href="{% url url_name %}" class="group relative flex flex-col items-center gap-2 p-5 bg-zinc-900 border border-white/[0.07] rounded-2xl text-center hover:border-gold/30 hover:-translate-y-1 transition-all duration-300 overflow-hidden">
-  {% if soon %}<span class="absolute top-2.5 right-2.5 text-[9px] font-black bg-lbl text-black px-1.5 py-0.5 rounded-full uppercase tracking-wide">Soon</span>{% endif %}
-  <div class="w-12 h-12 rounded-full bg-zinc-800 group-hover:bg-gold/10 flex items-center justify-center text-xl text-zinc-400 group-hover:text-gold transition-all">
+<a href="{% url url_name %}" class="tilt-card group relative flex flex-col gap-4 p-5 rounded-2xl border border-white/[0.07] hover:border-{{ accent|default:'gold' }}/30 overflow-hidden bg-gradient-to-br from-{{ accent|default:'gold' }}/[0.10] via-zinc-900 to-zinc-950">
+  {% if soon %}<span class="absolute top-2.5 right-2.5 text-[9px] font-black bg-lbl text-black px-1.5 py-0.5 rounded-full uppercase tracking-wide z-10">Soon</span>{% endif %}
+  <div class="w-11 h-11 rounded-xl bg-{{ accent|default:'gold' }}/15 flex items-center justify-center text-lg text-{{ accent|default:'gold' }} group-hover:scale-110 transition-transform">
     <i class="fa-solid {{ icon }}"></i>
   </div>
-  <div class="font-bold text-sm text-white">{{ name }}</div>
-  <div class="text-[11px] text-zinc-500 leading-tight">{{ desc }}</div>
+  <div>
+    <div class="font-bold text-sm text-white">{{ name }}</div>
+    <div class="text-[11px] text-zinc-500 leading-tight mt-0.5">{{ desc }}</div>
+  </div>
+  <i class="fa-solid fa-arrow-right absolute bottom-4 right-4 text-xs text-zinc-700 group-hover:text-{{ accent|default:'gold' }} group-hover:translate-x-1 transition-all"></i>
 </a>

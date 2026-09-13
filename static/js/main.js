@@ -1,10 +1,28 @@
 // Spacious Africa — main.js
 
-// navbar scroll
+// navbar scroll (IntersectionObserver on a top sentinel, no scroll-listener jank)
 const navbar = document.getElementById('navbar');
-if (navbar) window.addEventListener('scroll', () => {
-  navbar.classList.toggle('bg-zinc-950/95', window.scrollY > 10);
-});
+const navSentinel = document.getElementById('navSentinel');
+if (navbar && navSentinel) {
+  new IntersectionObserver(([entry]) => {
+    navbar.classList.toggle('bg-zinc-950/95', !entry.isIntersecting);
+  }).observe(navSentinel);
+}
+
+// scroll-reveal
+if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+} else {
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+}
 
 // mobile drawer
 const burgerBtn   = document.getElementById('burgerBtn');

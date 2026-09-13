@@ -12,7 +12,10 @@
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: { sans: ['DM Sans', 'system-ui', 'sans-serif'] },
+          fontFamily: {
+            sans: ['Manrope', 'system-ui', 'sans-serif'],
+            display: ['Bricolage Grotesque', 'system-ui', 'sans-serif'],
+          },
           colors: {
             gold:  { DEFAULT:'#D4AF37', light:'#F0D060', dark:'#A88820' },
             lbl:   { DEFAULT:'#64B5F6', dark:'#1565C0' },
@@ -23,16 +26,18 @@
     }
   </script>
 
-  <!-- DM Sans + Font Awesome -->
+  <!-- Bricolage Grotesque (display) + Manrope (body) + Font Awesome -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Manrope:wght@400..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="{% static 'css/main.css' %}">
   <link rel="icon" type="image/png" href="{% static 'images/spac.png' %}">
   {% block extra_css %}{% endblock %}
 </head>
 <body class="bg-zinc-950 text-white antialiased min-h-screen">
+
+<div id="navSentinel" class="absolute top-0 left-0 h-px w-full pointer-events-none"></div>
 
 <!-- ── NAVBAR ──────────────────────────────────── -->
 <header id="navbar" class="fixed top-0 inset-x-0 z-50 h-16 flex items-center px-4 md:px-8 border-b border-white/[0.06] bg-zinc-950/80 backdrop-blur-xl transition-colors duration-300">
